@@ -1,0 +1,70 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.all-graphs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-gap: 35px;
+  height: 90vh;
+  width: 80vw;
+  margin: auto;
+}
+
+.buttons {
+  margin-top: 10px;
+  margin-left: 50px;
+}
+
+.graph1 {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  height: 90vh;
+  width: 80vw;
+  margin-left: 50px;
+  margin-top: 20px;
+}
+
+.graph2 {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  height: 60vh;
+}
+
+.graph3 {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+  height: 60vh;
+}
+
+.graph4 {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  height: 60vh;
+}
+
+@media only screen and (max-width: 600px) {
+  .all-graphs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 90%;
+    margin: auto;
+  }
+
+  .graph1,
+  .graph2,
+  .graph3,
+  .graph4 {
+    width: 100%;
+    margin-bottom: 20px;
+    height: 50vh;
+  }
+}
