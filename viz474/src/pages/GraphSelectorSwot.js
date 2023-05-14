@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import BarGraph from "./SWOT";
-import data_s from "../strenght.json";
+import data_s from "../strength.json";
 import data_op from "../opportunity.json";
 import data_w from "../weakness.json";
 import data_t from "../threatanalysis.json";
