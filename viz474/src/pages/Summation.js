@@ -1,132 +1,101 @@
 import React, { Component } from "react";
-import BarGraph from "./SWOT";
-import data_s from "../strenght.json";
-import data_op from "../opportunity.json";
-import data_w from "../weakness.json";
-import data_t from "../threatanalysis.json";
-import "./GraphSelectorSwot.css";
+import Chart from "chart.js/auto";
 
-class GraphSummation extends Component {
+class SumBarGraph extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      selectedGraphId: 1,
-      showAllGraphs: true,
-      selectedParameter: "",
-    };
+    this.chartRef = React.createRef();
+    this.myChart = null;
   }
 
-  handleGraphSelect = (graphId) => {
-    this.setState({ selectedGraphId: graphId, showAllGraphs: false });
-  };
+  componentDidMount() {
+    this.createChart();
+  }
 
-  handleShowAllGraphs = () => {
-    this.setState({ showAllGraphs: true });
-  };
+  componentDidUpdate(prevProps) {
+    if (prevProps.data !== this.props.data) {
+      this.updateChart();
+    }
+  }
 
-  handleParameterSelect = (event) => {
-    const selectedParameter = event.target.value;
-    this.setState({ selectedParameter });
-  };
+  createChart() {
+    if (this.myChart) {
+      this.myChart.destroy();
+    }
+    const myChartRef = this.chartRef.current.getContext("2d");
+    this.myChart = new Chart(myChartRef, {
+      label: ["Strenght", "Weakness", "Opportunity", "Threat"],
+      type: "bar",
+      data: {
+        labels: ["Min", "Realistic", "Max", "Avg.", "3PT", "PERT"],
+        datasets: [
+          {
+            label: this.props.label,
+            data: [
+              this.props.data?.[0]?.["MIN PROB ADJUSTED VALUE"],
+              this.props.data?.[0]?.["REALISTIC PROB ADJUSTED VALUE"],
+              this.props.data?.[0]?.["MAX PROB ADJUSTED VALUE"],
+              this.props.data?.[0]?.["AVERAGE PROB ADJUSTED VALUE"],
+              this.props.data?.[0]?.["3 POINT BASED PROB ADJUSTED VALUE"],
+              this.props.data?.[0]?.["PERT BASED PROB ADJUSTED VALUE"],
+            ],
+            backgroundColor: [
+              "rgba(255, 99, 132, 0.2)",
+              "rgba(54, 162, 235, 0.2)",
+              "rgba(255, 206, 86, 0.2)",
+              "rgba(75, 192, 192, 0.2)",
+              "rgba(153, 102, 255, 0.2)",
+              "rgba(255, 159, 64, 0.2)",
+            ],
+            borderColor: [
+              "rgba(255, 99, 132, 1)",
+              "rgba(54, 162, 235, 1)",
+              "rgba(255, 206, 86, 1)",
+              "rgba(75, 192, 192, 1)",
+              "rgba(153, 102, 255, 1)",
+              "rgba(255, 159, 64, 1)",
+            ],
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true,
+              },
+              scaleLabel: {
+                display: true,
+                labelString: "Value",
+              },
+            },
+          ],
+        },
+      },
+    });
+  }
+
+  updateChart() {
+    this.myChart.data.datasets[0].data = [
+      this.props.data?.[0]?.["MIN PROB ADJUSTED VALUE"],
+      this.props.data?.[0]?.["REALISTIC PROB ADJUSTED VALUE"],
+      this.props.data?.[0]?.["MAX PROB ADJUSTED VALUE"],
+      this.props.data?.[0]?.["AVERAGE PROB ADJUSTED VALUE"],
+      this.props.data?.[0]?.["3 POINT BASED PROB ADJUSTED VALUE"],
+      this.props.data?.[0]?.["PERT BASED PROB ADJUSTED VALUE"],
+    ];
+    this.myChart.update();
+  }
 
   render() {
-    const { data_s, data_op, data_w, data_t } = this.props;
-    const { selectedGraphId, showAllGraphs, selectedParameter } = this.state;
-
-    if (showAllGraphs) {
-      return (
-        <div className="buttons">
-          <button onClick={() => this.setState({ showAllGraphs: false })}>
-            Hide All Graphs
-          </button>
-          <div className="all-graphs">
-            <BarGraph data={data_w} className="graph3" label="Weakness" />
-            <BarGraph data={data_s} className="graph1" label="Strength" />
-            <BarGraph data={data_t} className="graph4" label="Threat" />
-            <BarGraph data={data_op} className="graph2" label="Opportunity" />
-          </div>
-        </div>
-      );
-    }
-
-    let selectedData;
-    switch (selectedGraphId) {
-      case 1:
-        selectedData = data_s;
-        break;
-      case 2:
-        selectedData = data_op;
-        break;
-      case 3:
-        selectedData = data_w;
-        break;
-      case 4:
-        selectedData = data_t;
-        break;
-      default:
-        selectedData = {};
-        console.log("Invalid graph ID");
-    }
-
-    const allData = [data_s, data_op, data_w, data_t];
-    const allParamNames = Array.from(
-      new Set(allData.flatMap((data) => data.map((item) => item["PARAM NAME"])))
-    );
-
-    // Filter data based on selectedParameter
-    if (selectedParameter) {
-      selectedData = selectedData.filter(
-        (item) => item["PARAM NAME"] === selectedParameter
-      );
-    }
-
-    const labelData = {};
-    for (const item of selectedData) {
-      const label = item["PARAM NAME"];
-      const value = parseFloat(item.VALUE);
-      labelData[label] = (labelData[label] || 0) + value;
-    }
-
-    const graphData = Object.entries(labelData).map(([label, value]) => ({
-      "PARAM NAME": label,
-      VALUE: value.toFixed(2),
-    }));
-
     return (
       <div>
-        <div className="graph-selector">
-          <button className="buttons" onClick={this.handleShowAllGraphs}>
-            Show All Graphs
-          </button>
-          <select
-            value={selectedGraphId}
-            onChange={(e) => this.handleGraphSelect(parseInt(e.target.value))}
-          >
-            <option value={1}>Strength</option>
-            <option value={2}>Opportunity</option>
-            <option value={3}>Weakness</option>
-            <option value={4}>Threat</option>
-          </select>
-          <select
-            value={selectedParameter}
-            onChange={this.handleParameterSelect}
-          >
-            <option value="">Select a parameter</option>
-            {allParamNames.map((paramName, index) => (
-              <option key={index} value={paramName}>
-                {paramName}
-              </option>
-            ))}
-          </select>
-        </div>
-        <BarGraph
-          data={graphData}
-          className={`graph${selectedGraphId}`}
-          label={selectedData.length > 0 ? selectedData[0].LABEL : ""}
-        />
+        <canvas ref={this.chartRef} />
       </div>
     );
   }
 }
 
-export default GraphSummation;
+export default SumBarGraph;

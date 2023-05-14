@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import BarGraph from "./SWOT";
+import SumBarGraph from "./Summation";
 import data_s from "../strength.json";
 import data_op from "../opportunity.json";
 import data_w from "../weakness.json";
@@ -87,6 +88,7 @@ class GraphSelector extends Component {
             Show All Graphs
           </button>
           <select
+            className="select-category"
             value={selectedGraphId}
             onChange={(e) => this.handleGraphSelect(parseInt(e.target.value))}
           >
@@ -96,6 +98,7 @@ class GraphSelector extends Component {
             <option value={4}>Threat</option>
           </select>
           <select
+            className="select-category"
             value={selectedParameter}
             onChange={this.handleParameterSelect}
           >

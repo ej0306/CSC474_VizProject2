@@ -14,9 +14,12 @@ input {
   margin-bottom: 20px;
   border: none;
   border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-color: black;
+  box-shadow: 5px 5px 5px 4px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 400px;
+  font-weight: bold;
+  color: blue;
 }
 
 button {
@@ -42,4 +45,20 @@ ul {
 
 .toggle {
   margin-left: 970px;
+}
+
+.btn-group {
+  margin-bottom: 10px;
+  float: left;
+  margin-left: 10px;
+}
+
+.update {
+  margin-left: 10px;
+}
+
+.input-box {
+  float: left;
+  content: "";
+  margin-left: 50px;
 }
