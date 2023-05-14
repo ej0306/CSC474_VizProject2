@@ -107,7 +107,7 @@ const Form = () => {
     setStatsProbPert("");
   };
   return (
-    <div>
+    <div className="btn-group-container">
       <button className="toggle" onClick={() => setShowForm(!showForm)}>
         {showForm ? "Hide" : "Update"} Data
       </button>

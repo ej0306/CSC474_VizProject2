@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import GraphSelector from "./pages/GraphSelectorSwot"; // import the GraphSelector component from the GraphSelector.js file
 import Form from "./pages/form";
-import SumSelector from "./pages/SummationSelector";
+//import SumSelector from "./pages/SummationSelector";
 
 function App() {
   const [showForm, setShowForm] = useState(false);
@@ -12,8 +12,8 @@ function App() {
 
   return (
     <div className="App">
-      <GraphSelector />
       <Form />
+      <GraphSelector />
     </div>
   );
 }
