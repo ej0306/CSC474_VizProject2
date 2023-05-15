@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import data_s from "../strength.json";
-import data_op from "../opportunity.json";
-import data_w from "../weakness.json";
-import data_t from "../threatanalysis.json";
-import "./form.css";
+import data_s from "../../json_files/strength.json";
+import data_op from "../../json_files/opportunity.json";
+import data_w from "../../json_files/weakness.json";
+import data_t from "../../json_files/threatanalysis.json";
+import "./../stylesheets/form.css";
 
 const jsonFiles = [
   { label: "Strength", data: data_s },
@@ -105,6 +105,8 @@ const Form = () => {
     setMaxProb("");
     setStatsProb3Point("");
     setStatsProbPert("");
+
+    setShowForm(false);
   };
   return (
     <div className="btn-group-container">
@@ -117,6 +119,7 @@ const Form = () => {
             <label>
               Category:
               <select
+                className="param-btn"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
               >
@@ -129,33 +132,28 @@ const Form = () => {
               </select>
             </label>
             <br />
-
-            <ul>
-              {category === "Strength" &&
-                strengthData.map((item) => (
-                  <li key={item["PARAM NAME"]}>{item["PARAM NAME"]}</li>
-                ))}
-              {category === "Opportunity" &&
-                opportunityData.map((item) => (
-                  <li key={item["PARAM NAME"]}>{item["PARAM NAME"]}</li>
-                ))}
-              {category === "Weakness" &&
-                weaknessData.map((item) => (
-                  <li key={item["PARAM NAME"]}>{item["PARAM NAME"]}</li>
-                ))}
-              {category === "Threat Analysis" &&
-                threatData.map((item) => (
-                  <li key={item["PARAM NAME"]}>{item["PARAM NAME"]}</li>
-                ))}
-            </ul>
-            <label>
-              Parameter Name:
-              <input
-                type="text"
-                value={paramName}
-                onChange={(e) => setParamName(e.target.value)}
-              />
-            </label>
+            {category && (
+              <label>
+                Parameter:
+                <select
+                  className="param-btn"
+                  value={paramName}
+                  onChange={(e) => setParamName(e.target.value)}
+                >
+                  <option value="">--Select Parameter--</option>
+                  {jsonFiles
+                    .find((file) => file.label === category)
+                    .data.map((item) => (
+                      <option
+                        key={item["PARAM NAME"]}
+                        value={item["PARAM NAME"]}
+                      >
+                        {item["PARAM NAME"]}
+                      </option>
+                    ))}
+                </select>
+              </label>
+            )}
             <br />
             <button type="submit">Submit</button>
           </form>

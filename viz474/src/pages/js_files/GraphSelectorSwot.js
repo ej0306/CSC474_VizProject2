@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import BarGraph from "./SWOT";
-import SumBarGraph from "./Summation";
-import data_s from "../strength.json";
-import data_op from "../opportunity.json";
-import data_w from "../weakness.json";
-import data_t from "../threatanalysis.json";
-import "./GraphSelectorSwot.css";
+import Form from "./form";
+import data_s from "../../json_files/strength.json";
+import data_op from "../../json_files/opportunity.json";
+import data_w from "../../json_files/weakness.json";
+import data_t from "../../json_files/threatanalysis.json";
+import "./../stylesheets/GraphSelectorSwot.css";
 
 class GraphSelector extends Component {
   constructor(props) {
@@ -109,6 +109,9 @@ class GraphSelector extends Component {
               </option>
             ))}
           </select>
+          <div className="form">
+            <Form />
+          </div>
         </div>
 
         <BarGraph data={selectedData} className={`graph${selectedGraphId}`} />
