@@ -24,6 +24,7 @@ class BarGraph extends Component {
     }
     const myChartRef = this.chartRef.current.getContext("2d");
     this.myChart = new Chart(myChartRef, {
+      label: ["Strenght", "Weakness", "Opportunity", "Threat"],
       type: "bar",
       data: {
         labels: ["Min", "Realistic", "Max", "Avg.", "3PT", "PERT"],
@@ -71,6 +72,9 @@ class BarGraph extends Component {
               },
             },
           ],
+        },
+        legend: {
+          display: true,
         },
       },
     });

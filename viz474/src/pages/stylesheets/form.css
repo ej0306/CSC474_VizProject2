@@ -14,9 +14,12 @@ input {
   margin-bottom: 20px;
   border: none;
   border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-color: black;
+  box-shadow: 5px 5px 5px 4px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 400px;
+  color: rgb(32, 157, 230);
+  font-size: 18px;
 }
 
 button {
@@ -41,5 +44,31 @@ ul {
 }
 
 .toggle {
-  margin-left: 970px;
+  margin-left: 25px;
+}
+
+.btn-group {
+  margin-bottom: 10px;
+  float: left;
+  margin-left: 10px;
+}
+
+.update {
+  margin-left: 10px;
+}
+
+/* .input-box {
+  float: left;
+  content: "";
+  margin-left: 50px;
+} */
+
+.btn-group-container {
+  float: right;
+  margin-right: 55px;
+  margin-top: 15px;
+}
+
+.param-btn {
+  margin-bottom: 10px;
 }
