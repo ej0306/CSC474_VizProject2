@@ -41,10 +41,26 @@ class GraphSelector extends Component {
             Hide All Graphs
           </button>
           <div className="all-graphs">
-            <BarGraph data={data_w} className="graph3" label="Weakness" />
-            <BarGraph data={data_s} className="graph1" label="Strength" />
-            <BarGraph data={data_t} className="graph4" label="Threat" />
-            <BarGraph data={data_op} className="graph2" label="Opportunity" />
+            <BarGraph
+              data={data_s}
+              className="graph1"
+              label="STRENGTH - POSITIVE"
+            />
+            <BarGraph
+              data={data_w}
+              className="graph3"
+              label="WEAKNESS - NEGATIVE"
+            />
+            <BarGraph
+              data={data_op}
+              className="graph2"
+              label="OPPORTUNITY -  POSITIVE"
+            />
+            <BarGraph
+              data={data_t}
+              className="graph4"
+              label="THREAT - NEGATIVE"
+            />
           </div>
         </div>
       );
