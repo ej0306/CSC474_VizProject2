@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 import BarGraph from "./SWOT";
-import data_s from "../strenght.json";
-import data_op from "../opportunity.json";
-import data_w from "../weakness.json";
-import data_t from "../threatanalysis.json";
-import "./GraphSelectorSwot.css";
+import data_s from "../../json_files/strengthsum.json";
+import data_op from "../../json_files/opportunitysum.json";
+import data_w from "../../json_files/weaknesssum.json";
+import data_t from "../../json_files/threatanalysissum.json";
+import "./../stylesheets/GraphSelectorSwot.css";
 
-class GraphSummation extends Component {
+class GraphSelector extends Component {
   constructor(props) {
     super(props);
     this.state = {
       selectedGraphId: 1,
       showAllGraphs: true,
-      selectedParameter: "",
+      selectedParameter: "", // Added selectedParameter state
     };
   }
 
@@ -68,30 +68,6 @@ class GraphSummation extends Component {
         console.log("Invalid graph ID");
     }
 
-    const allData = [data_s, data_op, data_w, data_t];
-    const allParamNames = Array.from(
-      new Set(allData.flatMap((data) => data.map((item) => item["PARAM NAME"])))
-    );
-
-    // Filter data based on selectedParameter
-    if (selectedParameter) {
-      selectedData = selectedData.filter(
-        (item) => item["PARAM NAME"] === selectedParameter
-      );
-    }
-
-    const labelData = {};
-    for (const item of selectedData) {
-      const label = item["PARAM NAME"];
-      const value = parseFloat(item.VALUE);
-      labelData[label] = (labelData[label] || 0) + value;
-    }
-
-    const graphData = Object.entries(labelData).map(([label, value]) => ({
-      "PARAM NAME": label,
-      VALUE: value.toFixed(2),
-    }));
-
     return (
       <div>
         <div className="graph-selector">
@@ -99,6 +75,7 @@ class GraphSummation extends Component {
             Show All Graphs
           </button>
           <select
+            className="select-category"
             value={selectedGraphId}
             onChange={(e) => this.handleGraphSelect(parseInt(e.target.value))}
           >
@@ -107,26 +84,27 @@ class GraphSummation extends Component {
             <option value={3}>Weakness</option>
             <option value={4}>Threat</option>
           </select>
-          <select
-            value={selectedParameter}
-            onChange={this.handleParameterSelect}
-          >
-            <option value="">Select a parameter</option>
-            {allParamNames.map((paramName, index) => (
-              <option key={index} value={paramName}>
-                {paramName}
-              </option>
-            ))}
-          </select>
         </div>
-        <BarGraph
-          data={graphData}
-          className={`graph${selectedGraphId}`}
-          label={selectedData.length > 0 ? selectedData[0].LABEL : ""}
+
+        <BarGraph data={selectedData} className={`graph${selectedGraphId}`} />
+      </div>
+    );
+  }
+}
+
+class SumGraphSelect extends Component {
+  render() {
+    return (
+      <div className="graph1">
+        <GraphSelector
+          data_w={data_w}
+          data_s={data_s}
+          data_op={data_op}
+          data_t={data_t}
         />
       </div>
     );
   }
 }
 
-export default GraphSummation;
+export default SumGraphSelect;
