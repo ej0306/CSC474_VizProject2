@@ -24,7 +24,7 @@ function App() {
                 {showForm && <Form />}
                 <GraphSelector toggleForm={toggleForm} />
                 <Link to="/sum">
-                  <button class="btn-app">Go to Summation Page</button>
+                  <button class="btn-app">SUMMATION BARS</button>
                 </Link>
                 <Link to="/pos">
                   <button class="btn-app">POSITIVE/NEGATIVE BARS</button>
@@ -51,6 +51,9 @@ function App() {
             element={
               <div>
                 <PosBarGraph />
+                <Link to="/sum">
+                  <button class="btn-app">SUMMATION BARS</button>
+                </Link>
                 <Link to="/">
                   <button class="btn-app">SWOT ANALYSIS GRAPHS</button>
                 </Link>
