@@ -5,13 +5,20 @@ import data_s from "../../json_files/strength.json";
 import data_w from "../../json_files/weakness.json";
 import data_op from "../../json_files/opportunity.json";
 import data_t from "../../json_files/threatanalysis.json";
+import data_ss from "../../json_files/strengthsum.json";
+import data_ww from "../../json_files/weaknesssum.json";
+import data_ops from "../../json_files/opportunitysum.json";
+import data_tt from "../../json_files/threatanalysissum.json";
 
 const PosBarGraph = () => {
   const [factorTypePos, setFactorTypePos] = useState("");
   const [factorTypeNeg, setFactorTypeNeg] = useState(""); // State to hold the selected factor type
+  const [differential, setDifferential] = useState("");
+  const [showData, setShowData] = useState(true);
 
   let positiveData = [];
   let negativeData = [];
+  let differentialData = [];
 
   if ((factorTypePos || factorTypeNeg) === "Patented Technology") {
     positiveData = [
@@ -124,7 +131,35 @@ const PosBarGraph = () => {
       data_t[2]["PERT BASED PROB ADJUSTED VALUE"],
     ];
   }
+  if (differential === "Differential") {
+    differentialData = [
+      data_ss[0]["MIN PROB ADJUSTED VALUE"] +
+        data_ops[0]["MIN PROB ADJUSTED VALUE"] -
+        (data_ww[0]["MIN PROB ADJUSTED VALUE"] +
+          data_tt[0]["MIN PROB ADJUSTED VALUE"]),
+      data_ss[0]["REALISTIC PROB ADJUSTED VALUE"] +
+        data_ops[0]["REALISTIC PROB ADJUSTED VALUE"] -
+        (data_ww[0]["REALISTIC PROB ADJUSTED VALUE"] +
+          data_tt[0]["REALISTIC PROB ADJUSTED VALUE"]),
+      data_ss[0]["MAX PROB ADJUSTED VALUE"] +
+        data_ops[0]["MAX PROB ADJUSTED VALUE"] -
+        (data_ww[0]["MAX PROB ADJUSTED VALUE"] +
+          data_tt[0]["MAX PROB ADJUSTED VALUE"]),
+      data_ss[0]["AVERAGE PROB ADJUSTED VALUE"] +
+        data_ops[0]["AVERAGE PROB ADJUSTED VALUE"] -
+        (data_ww[0]["AVERAGE PROB ADJUSTED VALUE"] +
+          data_tt[0]["AVERAGE PROB ADJUSTED VALUE"]),
+      data_ss[0]["3 POINT BASED PROB ADJUSTED VALUE"] +
+        data_ops[0]["3 POINT BASED PROB ADJUSTED VALUE"] -
+        (data_ww[0]["3 POINT BASED  PROB ADJUSTED VALUE"] +
+          data_tt[0]["3 POINT BASED  PROB ADJUSTED VALUE"]),
 
+      data_ss[0]["PERT BASED PROB ADJUSTED VALUE"] +
+        data_ops[0]["PERT BASED PROB ADJUSTED VALUE"] -
+        (data_ww[0]["PERT BASED PROB ADJUSTED VALUE"] +
+          data_tt[0]["PERT BASED PROB ADJUSTED VALUE"]),
+    ];
+  }
   const data = {
     labels: [
       "MIN PROB ADJUSTED VALUE",
@@ -144,6 +179,12 @@ const PosBarGraph = () => {
         label: "Negative",
         data: negativeData,
         backgroundColor: "rgba(197,69,86)",
+      },
+      {
+        label: "Differential",
+        data:
+          showData && differential === "Differential" ? differentialData : [],
+        backgroundColor: "rgba(255,239,194)",
       },
     ],
   };
@@ -176,6 +217,14 @@ const PosBarGraph = () => {
   };
   const handleButtonClickNeg = (selectedFactorTypeNeg) => {
     setFactorTypeNeg(selectedFactorTypeNeg);
+  };
+
+  const handleButtonClickDiff = () => {
+    if (differential === "Differential") {
+      setDifferential(""); // Toggle off differential data display
+    } else {
+      setDifferential("Differential"); // Toggle on differential data display
+    }
   };
 
   return (
@@ -229,6 +278,13 @@ const PosBarGraph = () => {
             <option value="Competition">Threat - Competition</option>
             <option value="Tax Code change">Threat - Tax Code change</option>
           </select>
+        </div>
+        <div className="btn-grp-diff">
+          <button onClick={handleButtonClickDiff}>
+            {differential === "Differential"
+              ? "Hide Differential"
+              : "Show Differential"}
+          </button>
         </div>
       </div>
     </>
