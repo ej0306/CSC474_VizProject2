@@ -73,9 +73,6 @@ class BarGraph extends Component {
             },
           ],
         },
-        legend: {
-          display: true,
-        },
       },
     });
   }
