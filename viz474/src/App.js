@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import React, { useState } from "react";
-import GraphSelector from "./pages/js_files/GraphSelectorSwot"; // import the GraphSelector component from the GraphSelector.js file
+import GraphSelector from "./pages/js_files/GraphSelectorSwot";
 import Form from "./pages/js_files/form";
-import SumGraphSelect from "./pages/js_files/SummationSelector";
-import "./App.css";
 import PosBarGraph from "./pages/js_files/PositiveNegativeBar";
+import SumBarGraph from "./pages/js_files/SummationSelector";
+import "./App.css";
 
 function App() {
   const [showForm, setShowForm] = useState(false);
@@ -47,7 +47,7 @@ function App() {
                 <Link to="/pos">
                   <button class="btn-app">POSITIVE/NEGATIVE BARS</button>
                 </Link>
-                <SumGraphSelect />
+                <SumBarGraph />
               </div>
             }
           />

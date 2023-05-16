@@ -280,7 +280,9 @@ const PosBarGraph = () => {
         </div>
       </div>
       <div className="header">
-        <h3 className="title">POSITIVE/NEGATIVE Bar Graph</h3>
+        <h3 className="title">
+          {factorTypePos} || {factorTypeNeg} Bar Graph
+        </h3>
       </div>
       <div className="graph-container">
         <Bar data={data} options={options} />
