@@ -20,14 +20,17 @@ function App() {
             path="/"
             element={
               <div>
-                {showForm && <Form />}
-                <GraphSelector toggleForm={toggleForm} />
+                <Link to="/">
+                  <button class="btn-app">SWOT ANALYSIS GRAPHS</button>
+                </Link>
                 <Link to="/sum">
                   <button class="btn-app">SUMMATION BARS</button>
                 </Link>
                 <Link to="/pos">
                   <button class="btn-app">POSITIVE/NEGATIVE BARS</button>
                 </Link>
+                {showForm && <Form />}
+                <GraphSelector toggleForm={toggleForm} />
               </div>
             }
           />
@@ -35,13 +38,16 @@ function App() {
             path="/sum"
             element={
               <div>
-                <SumGraphSelect />
                 <Link to="/">
                   <button class="btn-app">SWOT ANALYSIS GRAPHS</button>
+                </Link>
+                <Link to="/sum">
+                  <button class="btn-app">SUMMATION BARS</button>
                 </Link>
                 <Link to="/pos">
                   <button class="btn-app">POSITIVE/NEGATIVE BARS</button>
                 </Link>
+                <SumGraphSelect />
               </div>
             }
           />
@@ -49,13 +55,16 @@ function App() {
             path="/pos"
             element={
               <div>
-                <PosBarGraph />
+                <Link to="/">
+                  <button class="btn-app">SWOT ANALYSIS GRAPHS</button>
+                </Link>
                 <Link to="/sum">
                   <button class="btn-app">SUMMATION BARS</button>
                 </Link>
                 <Link to="/">
                   <button class="btn-app">SWOT ANALYSIS GRAPHS</button>
                 </Link>
+                <PosBarGraph />
               </div>
             }
           />
