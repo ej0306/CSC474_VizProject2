@@ -1,8 +1,12 @@
 .graph-container {
-  width: 100%;
-  height: 900px;
-  margin-left: 20px;
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  height: 90vh;
+  width: 90vw;
+  margin-left: 50px;
+  margin-top: 20px;
 }
+
 .header {
   margin-left: 25px;
 }
@@ -10,6 +14,8 @@
 .btn-grp-posneg {
   display: flex;
   margin-left: 90px;
+  margin-top: 25px;
+  position: absolute;
 }
 
 .btn-neg {
@@ -18,4 +24,31 @@
 
 .btn-grp-diff {
   margin-left: 10px;
+}
+
+@media (max-width: 768px) {
+  .graph-container {
+    height: 600px;
+    margin-left: 10px;
+  }
+
+  .header {
+    margin-left: 15px;
+  }
+
+  .btn-grp-posneg {
+    margin-left: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .btn-neg {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+
+  .btn-grp-diff {
+    margin-left: 0;
+    margin-top: 10px;
+  }
 }
