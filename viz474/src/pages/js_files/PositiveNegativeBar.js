@@ -151,9 +151,8 @@ const PosBarGraph = () => {
           data_tt[0]["AVERAGE PROB ADJUSTED VALUE"]),
       data_ss[0]["3 POINT BASED PROB ADJUSTED VALUE"] +
         data_ops[0]["3 POINT BASED PROB ADJUSTED VALUE"] -
-        (data_ww[0]["3 POINT BASED  PROB ADJUSTED VALUE"] +
-          data_tt[0]["3 POINT BASED  PROB ADJUSTED VALUE"]),
-
+        (data_ww[0]["3 POINT BASED PROB ADJUSTED VALUE"] +
+          data_tt[0]["3 POINT BASED PROB ADJUSTED VALUE"]),
       data_ss[0]["PERT BASED PROB ADJUSTED VALUE"] +
         data_ops[0]["PERT BASED PROB ADJUSTED VALUE"] -
         (data_ww[0]["PERT BASED PROB ADJUSTED VALUE"] +
@@ -161,14 +160,7 @@ const PosBarGraph = () => {
     ];
   }
   const data = {
-    labels: [
-      "MIN PROB ADJUSTED VALUE",
-      "MAX PROB ADJUSTED VALUE",
-      "AVERAGE PROB ADJUSTED VALUE",
-      "REALISTIC PROB ADJUSTED VALUE",
-      "3 POINT BASED PROB ADJUSTED VALUE",
-      "PERT BASED PROB ADJUSTED VALUE",
-    ],
+    labels: ["MIN", "REALISTIC", "MAX", "AVERAGE", "3PT", "PERT"],
     datasets: [
       {
         label: "Positive",
