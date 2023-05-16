@@ -133,30 +133,83 @@ const PosBarGraph = () => {
   }
   if (differential === "Differential") {
     differentialData = [
-      data_ss[0]["MIN PROB ADJUSTED VALUE"] +
-        data_ops[0]["MIN PROB ADJUSTED VALUE"] -
-        (data_ww[0]["MIN PROB ADJUSTED VALUE"] +
-          data_tt[0]["MIN PROB ADJUSTED VALUE"]),
-      data_ss[0]["REALISTIC PROB ADJUSTED VALUE"] +
-        data_ops[0]["REALISTIC PROB ADJUSTED VALUE"] -
-        (data_ww[0]["REALISTIC PROB ADJUSTED VALUE"] +
-          data_tt[0]["REALISTIC PROB ADJUSTED VALUE"]),
-      data_ss[0]["MAX PROB ADJUSTED VALUE"] +
-        data_ops[0]["MAX PROB ADJUSTED VALUE"] -
-        (data_ww[0]["MAX PROB ADJUSTED VALUE"] +
-          data_tt[0]["MAX PROB ADJUSTED VALUE"]),
-      data_ss[0]["AVERAGE PROB ADJUSTED VALUE"] +
-        data_ops[0]["AVERAGE PROB ADJUSTED VALUE"] -
-        (data_ww[0]["AVERAGE PROB ADJUSTED VALUE"] +
-          data_tt[0]["AVERAGE PROB ADJUSTED VALUE"]),
-      data_ss[0]["3 POINT BASED PROB ADJUSTED VALUE"] +
-        data_ops[0]["3 POINT BASED PROB ADJUSTED VALUE"] -
-        (data_ww[0]["3 POINT BASED PROB ADJUSTED VALUE"] +
-          data_tt[0]["3 POINT BASED PROB ADJUSTED VALUE"]),
-      data_ss[0]["PERT BASED PROB ADJUSTED VALUE"] +
-        data_ops[0]["PERT BASED PROB ADJUSTED VALUE"] -
-        (data_ww[0]["PERT BASED PROB ADJUSTED VALUE"] +
-          data_tt[0]["PERT BASED PROB ADJUSTED VALUE"]),
+      data_s[0]["MIN PROB ADJUSTED VALUE"] +
+        data_s[1]["MIN PROB ADJUSTED VALUE"] +
+        data_s[2]["MIN PROB ADJUSTED VALUE"] +
+        (data_op[0]["MIN PROB ADJUSTED VALUE"] +
+          data_op[1]["MIN PROB ADJUSTED VALUE"] +
+          data_op[2]["MIN PROB ADJUSTED VALUE"]) -
+        (data_w[0]["MIN PROB ADJUSTED VALUE"] +
+          data_w[1]["MIN PROB ADJUSTED VALUE"] +
+          data_w[2]["MIN PROB ADJUSTED VALUE"] +
+          (data_tt[0]["MIN PROB ADJUSTED VALUE"] +
+            data_t[1]["MIN PROB ADJUSTED VALUE"] +
+            data_t[2]["MIN PROB ADJUSTED VALUE"])),
+
+      data_s[0]["REALISTIC PROB ADJUSTED VALUE"] +
+        data_s[1]["REALISTIC PROB ADJUSTED VALUE"] +
+        data_s[2]["REALISTIC PROB ADJUSTED VALUE"] +
+        (data_op[0]["REALISTIC PROB ADJUSTED VALUE"] +
+          data_op[1]["REALISTIC PROB ADJUSTED VALUE"] +
+          data_op[2]["REALISTIC PROB ADJUSTED VALUE"]) -
+        (data_w[0]["REALISTIC PROB ADJUSTED VALUE"] +
+          data_w[1]["REALISTIC PROB ADJUSTED VALUE"] +
+          data_w[2]["REALISTIC PROB ADJUSTED VALUE"] +
+          (data_tt[0]["REALISTIC PROB ADJUSTED VALUE"] +
+            data_t[1]["REALISTIC PROB ADJUSTED VALUE"] +
+            data_t[2]["REALISTIC PROB ADJUSTED VALUE"])),
+
+      data_s[0]["MAX PROB ADJUSTED VALUE"] +
+        data_s[1]["MAX PROB ADJUSTED VALUE"] +
+        data_s[2]["MAX PROB ADJUSTED VALUE"] +
+        (data_op[0]["MAX PROB ADJUSTED VALUE"] +
+          data_op[1]["MAX PROB ADJUSTED VALUE"] +
+          data_op[2]["MAX PROB ADJUSTED VALUE"]) -
+        (data_w[0]["MAX PROB ADJUSTED VALUE"] +
+          data_w[1]["MAX PROB ADJUSTED VALUE"] +
+          data_w[2]["MAX PROB ADJUSTED VALUE"] +
+          (data_tt[0]["MAX PROB ADJUSTED VALUE"] +
+            data_t[1]["MAX PROB ADJUSTED VALUE"] +
+            data_t[2]["MAX PROB ADJUSTED VALUE"])),
+
+      data_s[0]["AVERAGE PROB ADJUSTED VALUE"] +
+        data_s[1]["AVERAGE PROB ADJUSTED VALUE"] +
+        data_s[2]["AVERAGE PROB ADJUSTED VALUE"] +
+        (data_op[0]["AVERAGE PROB ADJUSTED VALUE"] +
+          data_op[1]["AVERAGE PROB ADJUSTED VALUE"] +
+          data_op[2]["AVERAGE PROB ADJUSTED VALUE"]) -
+        (data_w[0]["AVERAGE PROB ADJUSTED VALUE"] +
+          data_w[1]["AVERAGE PROB ADJUSTED VALUE"] +
+          data_w[2]["AVERAGE PROB ADJUSTED VALUE"] +
+          (data_tt[0]["AVERAGE PROB ADJUSTED VALUE"] +
+            data_t[1]["AVERAGE PROB ADJUSTED VALUE"] +
+            data_t[2]["AVERAGE PROB ADJUSTED VALUE"])),
+
+      data_s[0]["3 POINT BASED PROB ADJUSTED VALUE"] +
+        data_s[1]["3 POINT BASED PROB ADJUSTED VALUE"] +
+        data_s[2]["3 POINT BASED PROB ADJUSTED VALUE"] +
+        (data_op[0]["3 POINT BASED PROB ADJUSTED VALUE"] +
+          data_op[1]["3 POINT BASED PROB ADJUSTED VALUE"] +
+          data_op[2]["3 POINT BASED PROB ADJUSTED VALUE"]) -
+        (data_w[0]["3 POINT BASED PROB ADJUSTED VALUE"] +
+          data_w[1]["3 POINT BASED PROB ADJUSTED VALUE"] +
+          data_w[2]["3 POINT BASED PROB ADJUSTED VALUE"] +
+          (data_tt[0]["3 POINT BASED PROB ADJUSTED VALUE"] +
+            data_t[1]["3 POINT BASED PROB ADJUSTED VALUE"] +
+            data_t[2]["3 POINT BASED PROB ADJUSTED VALUE"])),
+
+      data_s[0]["PERT BASED PROB ADJUSTED VALUE"] +
+        data_s[1]["PERT BASED PROB ADJUSTED VALUE"] +
+        data_s[2]["PERT BASED PROB ADJUSTED VALUE"] +
+        (data_op[0]["PERT BASED PROB ADJUSTED VALUE"] +
+          data_op[1]["PERT BASED PROB ADJUSTED VALUE"] +
+          data_op[2]["PERT BASED PROB ADJUSTED VALUE"]) -
+        (data_w[0]["PERT BASED PROB ADJUSTED VALUE"] +
+          data_w[1]["PERT BASED PROB ADJUSTED VALUE"] +
+          data_w[2]["PERT BASED PROB ADJUSTED VALUE"] +
+          (data_tt[0]["PERT BASED PROB ADJUSTED VALUE"] +
+            data_t[1]["PERT BASED PROB ADJUSTED VALUE"] +
+            data_t[2]["PERT BASED PROB ADJUSTED VALUE"])),
     ];
   }
   const data = {
