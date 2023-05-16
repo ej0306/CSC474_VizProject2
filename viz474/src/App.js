@@ -61,8 +61,8 @@ function App() {
                 <Link to="/sum">
                   <button class="btn-app">SUMMATION BARS</button>
                 </Link>
-                <Link to="/">
-                  <button class="btn-app">SWOT ANALYSIS GRAPHS</button>
+                <Link to="/pos">
+                  <button class="btn-app">POSITIVE/NEGATIVE BARS</button>
                 </Link>
                 <PosBarGraph />
               </div>

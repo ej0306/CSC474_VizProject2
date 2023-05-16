@@ -221,63 +221,69 @@ const PosBarGraph = () => {
 
   return (
     <>
+      <div className="btn-posneg-grp">
+        <div className="btn-grp-posneg">
+          <div>
+            <select
+              value={factorTypePos}
+              onChange={(e) => handleButtonClickPos(e.target.value)}
+            >
+              <option value="">Select Factor Type</option>
+              <option value="Patented Technology">
+                Strength - Patented Technology
+              </option>
+              <option value="Tech Resources">Strength - Tech Resources</option>
+              <option value="Transportation Access Points">
+                Strength - Transportation Access Points
+              </option>
+              <option value="Local Tax Incentive">
+                Opportunity - Local Tax Incentive
+              </option>
+              <option value="Export Zone Location">
+                Opportunity - Export Zone Location
+              </option>
+              <option value="Easy Access to Ports">
+                Opportunity - Easy Access to Ports
+              </option>
+            </select>
+          </div>
+
+          <div className="btn-neg">
+            <select
+              value={factorTypeNeg}
+              onChange={(e) => handleButtonClickNeg(e.target.value)}
+            >
+              <option value="">Select Factor Type</option>
+              <option value="Real Estate Cost">
+                Weakness - Real Estate Cost
+              </option>
+              <option value="Tech Platform Changes">
+                Weakness - Tech Platform Changes
+              </option>
+              <option value="Access to Ports">
+                Weakness - Access to Ports
+              </option>
+              <option value="Political unrest">
+                Threat - Political unrest
+              </option>
+              <option value="Competition">Threat - Competition</option>
+              <option value="Tax Code change">Threat - Tax Code change</option>
+            </select>
+          </div>
+          <div className="btn-grp-diff">
+            <button onClick={handleButtonClickDiff}>
+              {differential === "Differential"
+                ? "Hide Differential"
+                : "Show Differential"}
+            </button>
+          </div>
+        </div>
+      </div>
       <div className="header">
         <h3 className="title">POSITIVE/NEGATIVE Bar Graph</h3>
       </div>
       <div className="graph-container">
         <Bar data={data} options={options} />
-      </div>
-      <div className="btn-grp-posneg">
-        <div>
-          <select
-            value={factorTypePos}
-            onChange={(e) => handleButtonClickPos(e.target.value)}
-          >
-            <option value="">Select Factor Type</option>
-            <option value="Patented Technology">
-              Strength - Patented Technology
-            </option>
-            <option value="Tech Resources">Strength - Tech Resources</option>
-            <option value="Transportation Access Points">
-              Strength - Transportation Access Points
-            </option>
-            <option value="Local Tax Incentive">
-              Opportunity - Local Tax Incentive
-            </option>
-            <option value="Export Zone Location">
-              Opportunity - Export Zone Location
-            </option>
-            <option value="Easy Access to Ports">
-              Opportunity - Easy Access to Ports
-            </option>
-          </select>
-        </div>
-
-        <div className="btn-neg">
-          <select
-            value={factorTypeNeg}
-            onChange={(e) => handleButtonClickNeg(e.target.value)}
-          >
-            <option value="">Select Factor Type</option>
-            <option value="Real Estate Cost">
-              Weakness - Real Estate Cost
-            </option>
-            <option value="Tech Platform Changes">
-              Weakness - Tech Platform Changes
-            </option>
-            <option value="Access to Ports">Weakness - Access to Ports</option>
-            <option value="Political unrest">Threat - Political unrest</option>
-            <option value="Competition">Threat - Competition</option>
-            <option value="Tax Code change">Threat - Tax Code change</option>
-          </select>
-        </div>
-        <div className="btn-grp-diff">
-          <button onClick={handleButtonClickDiff}>
-            {differential === "Differential"
-              ? "Hide Differential"
-              : "Show Differential"}
-          </button>
-        </div>
       </div>
     </>
   );
