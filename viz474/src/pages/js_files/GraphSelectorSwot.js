@@ -14,7 +14,7 @@ class GraphSelector extends Component {
       selectedGraphId: 1,
       showAllGraphs: true,
       selectedParameter: "", // Added selectedParameter state
-      scaleType: "logarithmic", // Added scaleType state
+      scaleType: "linear", // Added scaleType state
     };
   }
 

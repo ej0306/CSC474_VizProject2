@@ -163,17 +163,17 @@ const PosBarGraph = () => {
     if (positiveValues && negativeValues) {
       differentialData = [
         positiveValues["MIN PROB ADJUSTED VALUE"] +
-          -(negativeValues["MIN PROB ADJUSTED VALUE"] * -1),
+          -(-negativeValues["MIN PROB ADJUSTED VALUE"]),
         positiveValues["REALISTIC PROB ADJUSTED VALUE"] +
-          -(negativeValues["REALISTIC PROB ADJUSTED VALUE"] * -1),
+          -(-negativeValues["REALISTIC PROB ADJUSTED VALUE"]),
         positiveValues["MAX PROB ADJUSTED VALUE"] +
-          -(negativeValues["MAX PROB ADJUSTED VALUE"] * -1),
+          -(-negativeValues["MAX PROB ADJUSTED VALUE"]),
         positiveValues["AVERAGE PROB ADJUSTED VALUE"] +
-          -(negativeValues["AVERAGE PROB ADJUSTED VALUE"] * -1),
+          -(-negativeValues["AVERAGE PROB ADJUSTED VALUE"]),
         positiveValues["3 POINT BASED PROB ADJUSTED VALUE"] +
-          -(negativeValues["3 POINT BASED PROB ADJUSTED VALUE"] * -1),
+          -(-negativeValues["3 POINT BASED PROB ADJUSTED VALUE"]),
         positiveValues["PERT BASED PROB ADJUSTED VALUE"] +
-          -(negativeValues["PERT BASED PROB ADJUSTED VALUE"] * -1),
+          -(-negativeValues["PERT BASED PROB ADJUSTED VALUE"]),
       ];
     } else {
       differentialData = [];
@@ -221,7 +221,7 @@ const PosBarGraph = () => {
     },
     plugins: {
       datalabels: {
-        anchor: "end",
+        anchor: "center",
         align: "end",
         formatter: (value) =>
           typeof value === "number" ? value.toFixed(2) : "",

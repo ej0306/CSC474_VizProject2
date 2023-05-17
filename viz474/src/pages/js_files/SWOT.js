@@ -81,7 +81,7 @@ class BarGraph extends Component {
         },
         plugins: {
           datalabels: {
-            anchor: "end",
+            anchor: "center",
             align: "end",
             formatter: (value) =>
               typeof value === "number" ? value.toFixed(2) : "",

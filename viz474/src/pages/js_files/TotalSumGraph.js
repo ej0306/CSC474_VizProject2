@@ -125,7 +125,7 @@ const TotalBarGraph = () => {
 
     if (positiveValues && negativeValues) {
       differentialData = positiveValues.map(
-        (value, index) => value - negativeValues[index]
+        (value, index) => value - (-negativeValues[index])
       );
     } else {
       differentialData = [];
@@ -166,7 +166,7 @@ const TotalBarGraph = () => {
     },
     plugins: {
       datalabels: {
-        anchor: "end",
+        anchor: "center",
         align: "end",
         formatter: (value) => (value !== 0 ? value : ""),
         color: "teal", //Color of the value labels

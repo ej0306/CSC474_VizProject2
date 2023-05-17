@@ -169,7 +169,7 @@ const SumBarGraph = () => {
     },
     plugins: {
       datalabels: {
-        anchor: "end",
+        anchor: "center",
         align: "end",
         formatter: (value) =>
           typeof value === "number" ? value.toFixed(2) : "",
