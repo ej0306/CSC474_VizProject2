@@ -203,13 +203,19 @@ const PosBarGraph = () => {
 
   const options = {
     scales: {
-      yAxes: [
-        {
-          ticks: {
-            beginAtZero: true,
+      y: {
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: "Values in Dollar ($)",
+          font: {
+            family: "Arial",
+            size: 25,
+            weight: "bold",
+            lineHeight: 1.2,
           },
         },
-      ],
+      },
     },
     plugins: {
       datalabels: {

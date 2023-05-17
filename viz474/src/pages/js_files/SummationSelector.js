@@ -148,13 +148,19 @@ const SumBarGraph = () => {
 
   const options = {
     scales: {
-      yAxes: [
-        {
-          ticks: {
-            beginAtZero: true,
+      y: {
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: "Values in Dollar ($)",
+          font: {
+            family: "Arial",
+            size: 25,
+            weight: "bold",
+            lineHeight: 1.2,
           },
         },
-      ],
+      },
     },
     legend: {
       display: false,
@@ -165,9 +171,9 @@ const SumBarGraph = () => {
         align: "end",
         formatter: (value) =>
           typeof value === "number" ? value.toFixed(2) : "",
-        color: "teal", // Color of the value labels
+        color: "teal",
         font: {
-          weight: "bold", // Font weight of the value labels
+          weight: "bold",
           size: 14,
         },
       },
