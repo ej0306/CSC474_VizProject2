@@ -85,6 +85,13 @@ class BarGraph extends Component {
               size: 15,
             },
           },
+          legend: {
+            display: true,
+            labels: {
+              boxWidth: 0,
+            },
+            align: "end",
+          },
         },
       },
       plugins: [ChartDataLabels], // Add the datalabels plugin to the list of plugins

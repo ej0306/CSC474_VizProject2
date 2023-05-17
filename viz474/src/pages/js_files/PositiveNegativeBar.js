@@ -162,17 +162,17 @@ const PosBarGraph = () => {
     if (positiveValues && negativeValues) {
       differentialData = [
         positiveValues["MIN PROB ADJUSTED VALUE"] +
-          -negativeValues["MIN PROB ADJUSTED VALUE"],
+          -(negativeValues["MIN PROB ADJUSTED VALUE"] * -1),
         positiveValues["REALISTIC PROB ADJUSTED VALUE"] +
-          -negativeValues["REALISTIC PROB ADJUSTED VALUE"],
+          -(negativeValues["REALISTIC PROB ADJUSTED VALUE"] * -1),
         positiveValues["MAX PROB ADJUSTED VALUE"] +
-          -negativeValues["MAX PROB ADJUSTED VALUE"],
+          -(negativeValues["MAX PROB ADJUSTED VALUE"] * -1),
         positiveValues["AVERAGE PROB ADJUSTED VALUE"] +
-          -negativeValues["AVERAGE PROB ADJUSTED VALUE"],
+          -(negativeValues["AVERAGE PROB ADJUSTED VALUE"] * -1),
         positiveValues["3 POINT BASED PROB ADJUSTED VALUE"] +
-          -negativeValues["3 POINT BASED PROB ADJUSTED VALUE"],
+          -(negativeValues["3 POINT BASED PROB ADJUSTED VALUE"] * -1),
         positiveValues["PERT BASED PROB ADJUSTED VALUE"] +
-          -negativeValues["PERT BASED PROB ADJUSTED VALUE"],
+          -(negativeValues["PERT BASED PROB ADJUSTED VALUE"] * -1),
       ];
     } else {
       differentialData = [];
@@ -215,12 +215,16 @@ const PosBarGraph = () => {
       datalabels: {
         anchor: "end",
         align: "end",
-        formatter: (value) => (value !== 0 ? value.toFixed(2) : ""),
+        formatter: (value) =>
+          typeof value === "number" ? value.toFixed(2) : "",
         color: "teal", //Color of the value labels
         font: {
           weight: "bold", // Font weight of the value labels
           size: 15, // Font size of the value labels
         },
+      },
+      legend: {
+        align: "end",
       },
     },
   };

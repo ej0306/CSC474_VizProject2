@@ -171,6 +171,12 @@ const SumBarGraph = () => {
           size: 14,
         },
       },
+      legend: {
+        display: false,
+        labels: {
+          boxWidth: 0,
+        },
+      },
     },
   };
 
