@@ -11,6 +11,7 @@ const PosBarGraph = () => {
   const [factorTypePos, setFactorTypePos] = useState("");
   const [factorTypeNeg, setFactorTypeNeg] = useState(""); // State to hold the selected factor type
   const [differential, setDifferential] = useState("");
+  const [scaleType, setScaleType] = useState("linear");
   const [showData, setShowData] = useState(true);
 
   let positiveData = [];
@@ -204,6 +205,7 @@ const PosBarGraph = () => {
   const options = {
     scales: {
       y: {
+        type: scaleType, // Use the selected scale type
         beginAtZero: true,
         title: {
           display: true,
@@ -250,6 +252,11 @@ const PosBarGraph = () => {
     }
   };
 
+  const handleScaleButtonClick = () => {
+    setScaleType((prevScaleType) =>
+      prevScaleType === "linear" ? "logarithmic" : "linear"
+    );
+  };
   return (
     <>
       <div className="btn-posneg-grp">
@@ -305,6 +312,11 @@ const PosBarGraph = () => {
               {differential === "Differential"
                 ? "Summation/Diffrential"
                 : "Summation/Diffrential"}
+            </button>
+          </div>
+          <div className="btn-grp-scale">
+            <button onClick={handleScaleButtonClick}>
+              {scaleType === "linear" ? "Log Scale" : "Linear Scale"}
             </button>
           </div>
         </div>

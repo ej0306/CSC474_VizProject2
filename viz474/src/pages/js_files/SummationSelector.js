@@ -15,6 +15,7 @@ const SumBarGraph = () => {
   const [sDataRel, setSDataRel] = useState(0);
   const [sData3pt, setSData3pt] = useState(0);
   const [sDataPert, setSDataPert] = useState(0);
+  const [scaleType, setScaleType] = useState("linear");
 
   useEffect(() => {
     if (category === "Strength") {
@@ -149,6 +150,7 @@ const SumBarGraph = () => {
   const options = {
     scales: {
       y: {
+        type: scaleType, // Use the selected scale type
         beginAtZero: true,
         title: {
           display: true,
@@ -189,6 +191,11 @@ const SumBarGraph = () => {
   const handleButtonClick = (selectedFactorType) => {
     setCategory(selectedFactorType);
   };
+  const handleScaleButtonClick = () => {
+    setScaleType((prevScaleType) =>
+      prevScaleType === "linear" ? "logarithmic" : "linear"
+    );
+  };
 
   return (
     <>
@@ -205,6 +212,11 @@ const SumBarGraph = () => {
               <option value="Weakness">Weakness</option>
               <option value="Threat">Threat</option>
             </select>
+          </div>
+          <div className="btn-grp-scale">
+            <button onClick={handleScaleButtonClick}>
+              {scaleType === "linear" ? "Log Scale" : "Linear Scale"}
+            </button>
           </div>
         </div>
       </div>

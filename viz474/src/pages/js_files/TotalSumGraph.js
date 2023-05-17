@@ -12,6 +12,7 @@ const TotalBarGraph = () => {
   const [factorTypeNeg, setFactorTypeNeg] = useState(""); // State to hold the selected factor type
   const [differential, setDifferential] = useState("");
   const [showData, setShowData] = useState(true);
+  const [scaleType, setScaleType] = useState("linear");
 
   let positiveData = [];
   let negativeData = [];
@@ -149,6 +150,7 @@ const TotalBarGraph = () => {
   const options = {
     scales: {
       y: {
+        type: scaleType, // Use the selected scale type
         beginAtZero: true,
         title: {
           display: true,
@@ -197,6 +199,12 @@ const TotalBarGraph = () => {
     }
   };
 
+  const handleScaleButtonClick = () => {
+    setScaleType((prevScaleType) =>
+      prevScaleType === "linear" ? "logarithmic" : "linear"
+    );
+  };
+
   return (
     <>
       <div className="btn-posneg-grp">
@@ -208,8 +216,14 @@ const TotalBarGraph = () => {
                 : "Show Differential"}
             </button>
           </div>
+          <div className="btn-grp-scale">
+            <button onClick={handleScaleButtonClick}>
+              {scaleType === "linear" ? "Log Scale" : "Linear Scale"}
+            </button>
+          </div>
         </div>
       </div>
+
       <div className="header">
         <h3 className="title">
           Total Values in Dollar for Strength, Oppportunity, Weakness, and

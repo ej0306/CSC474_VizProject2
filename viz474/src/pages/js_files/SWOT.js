@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Chart from "chart.js/auto";
-import ChartDataLabels from "chartjs-plugin-datalabels"; // Import the datalabels plugin
+import ChartDataLabels from "chartjs-plugin-datalabels";
 
 class BarGraph extends Component {
   constructor(props) {
@@ -14,7 +14,10 @@ class BarGraph extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.data !== this.props.data) {
+    if (
+      prevProps.data !== this.props.data ||
+      prevProps.scaleType !== this.props.scaleType
+    ) {
       this.updateChart();
     }
   }
@@ -63,6 +66,7 @@ class BarGraph extends Component {
         scales: {
           y: {
             beginAtZero: true,
+            type: this.props.scaleType, // Use the scale type specified by the prop
             title: {
               display: true,
               text: "Values in Dollar ($)",
@@ -81,9 +85,9 @@ class BarGraph extends Component {
             align: "end",
             formatter: (value) =>
               typeof value === "number" ? value.toFixed(2) : "",
-            color: "teal", // Color of the value labels
+            color: "teal",
             font: {
-              weight: "bold", // Font weight of the value labels
+              weight: "bold",
               size: 15,
             },
           },
@@ -97,7 +101,7 @@ class BarGraph extends Component {
           },
         },
       },
-      plugins: [ChartDataLabels], // Add the datalabels plugin to the list of plugins
+      plugins: [ChartDataLabels],
     });
   }
 
@@ -110,6 +114,7 @@ class BarGraph extends Component {
       this.props.data?.[0]?.["3 POINT BASED PROB ADJUSTED VALUE"],
       this.props.data?.[0]?.["PERT BASED PROB ADJUSTED VALUE"],
     ];
+    this.myChart.options.scales.y.type = this.props.scaleType; // Update the scale type
     this.myChart.update();
   }
 

@@ -14,6 +14,7 @@ class GraphSelector extends Component {
       selectedGraphId: 1,
       showAllGraphs: true,
       selectedParameter: "", // Added selectedParameter state
+      scaleType: "logarithmic", // Added scaleType state
     };
   }
 
@@ -30,9 +31,16 @@ class GraphSelector extends Component {
     this.setState({ selectedParameter });
   };
 
+  handleScaleChange = () => {
+    const { scaleType } = this.state;
+    const newScaleType = scaleType === "linear" ? "logarithmic" : "linear";
+    this.setState({ scaleType: newScaleType });
+  };
+
   render() {
     const { data_s, data_op, data_w, data_t } = this.props;
-    const { selectedGraphId, showAllGraphs, selectedParameter } = this.state;
+    const { selectedGraphId, showAllGraphs, selectedParameter, scaleType } =
+      this.state;
 
     if (showAllGraphs) {
       return (
@@ -45,21 +53,25 @@ class GraphSelector extends Component {
               data={data_s}
               className="graph1"
               label="STRENGTH - POSITIVE"
+              scaleType={scaleType} // Pass the scaleType prop to BarGraph
             />
             <BarGraph
               data={data_w}
               className="graph3"
               label="WEAKNESS - NEGATIVE"
+              scaleType={scaleType} // Pass the scaleType prop to BarGraph
             />
             <BarGraph
               data={data_op}
               className="graph2"
               label="OPPORTUNITY -  POSITIVE"
+              scaleType={scaleType} // Pass the scaleType prop to BarGraph
             />
             <BarGraph
               data={data_t}
               className="graph4"
               label="THREAT - NEGATIVE"
+              scaleType={scaleType} // Pass the scaleType prop to BarGraph
             />
           </div>
         </div>
@@ -125,12 +137,21 @@ class GraphSelector extends Component {
               </option>
             ))}
           </select>
+          <button className="buttons" onClick={this.handleScaleChange}>
+            {scaleType === "linear"
+              ? "Switch to Log Scale"
+              : "Switch to Linear Scale"}
+          </button>
           <div className="form">
             <Form />
           </div>
         </div>
 
-        <BarGraph data={selectedData} className={`graph${selectedGraphId}`} />
+        <BarGraph
+          data={selectedData}
+          className={`graph${selectedGraphId}`}
+          scaleType={scaleType} // Pass the scaleType prop to BarGraph
+        />
       </div>
     );
   }
