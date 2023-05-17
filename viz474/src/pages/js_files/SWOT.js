@@ -91,6 +91,7 @@ class BarGraph extends Component {
             display: true,
             labels: {
               boxWidth: 0,
+              fontSize: 16,
             },
             align: "end",
           },
