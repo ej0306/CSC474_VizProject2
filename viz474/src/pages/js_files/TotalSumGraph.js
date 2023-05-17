@@ -18,85 +18,109 @@ const TotalBarGraph = () => {
   let differentialData = [];
 
   positiveData = [
-    data_s.reduce((sum, item) => sum + item["MIN PROB ADJUSTED VALUE"], 0) +
+    data_s.reduce(
+      (sum, item) => sum + (item["MIN PROB ADJUSTED VALUE"] || 0),
+      0
+    ) +
       data_s.reduce(
-        (sum, item) => sum + item["REALISTIC PROB ADJUSTED VALUE"],
-        0
-      ) +
-      data_s.reduce((sum, item) => sum + item["MAX PROB ADJUSTED VALUE"], 0) +
-      data_s.reduce(
-        (sum, item) => sum + item["AVERAGE PROB ADJUSTED VALUE"],
+        (sum, item) => sum + (item["REALISTIC PROB ADJUSTED VALUE"] || 0),
         0
       ) +
       data_s.reduce(
-        (sum, item) => sum + item["3 POINT BASED PROB ADJUSTED VALUE"],
+        (sum, item) => sum + (item["MAX PROB ADJUSTED VALUE"] || 0),
         0
       ) +
       data_s.reduce(
-        (sum, item) => sum + item["PERT BASED PROB ADJUSTED VALUE"],
+        (sum, item) => sum + (item["AVERAGE PROB ADJUSTED VALUE"] || 0),
         0
       ) +
-      data_op.reduce((sum, item) => sum + item["MIN PROB ADJUSTED VALUE"], 0) +
-      data_op.reduce(
-        (sum, item) => sum + item["REALISTIC PROB ADJUSTED VALUE"],
+      data_s.reduce(
+        (sum, item) => sum + (item["3 POINT BASED PROB ADJUSTED VALUE"] || 0),
         0
       ) +
-      data_op.reduce((sum, item) => sum + item["MAX PROB ADJUSTED VALUE"], 0) +
-      data_op.reduce(
-        (sum, item) => sum + item["AVERAGE PROB ADJUSTED VALUE"],
-        0
-      ) +
-      data_op.reduce(
-        (sum, item) => sum + item["3 POINT BASED PROB ADJUSTED VALUE"],
+      data_s.reduce(
+        (sum, item) => sum + (item["PERT BASED PROB ADJUSTED VALUE"] || 0),
         0
       ) +
       data_op.reduce(
-        (sum, item) => sum + item["PERT BASED PROB ADJUSTED VALUE"],
+        (sum, item) => sum + (item["MIN PROB ADJUSTED VALUE"] || 0),
+        0
+      ) +
+      data_op.reduce(
+        (sum, item) => sum + (item["REALISTIC PROB ADJUSTED VALUE"] || 0),
+        0
+      ) +
+      data_op.reduce(
+        (sum, item) => sum + (item["MAX PROB ADJUSTED VALUE"] || 0),
+        0
+      ) +
+      data_op.reduce(
+        (sum, item) => sum + (item["AVERAGE PROB ADJUSTED VALUE"] || 0),
+        0
+      ) +
+      data_op.reduce(
+        (sum, item) => sum + (item["3 POINT BASED PROB ADJUSTED VALUE"] || 0),
+        0
+      ) +
+      data_op.reduce(
+        (sum, item) => sum + (item["PERT BASED PROB ADJUSTED VALUE"] || 0),
         0
       ),
   ];
 
   negativeData = [
-    data_w.reduce((sum, item) => sum + item["MIN PROB ADJUSTED VALUE"], 0) +
+    data_w.reduce(
+      (sum, item) => sum + (item["MIN PROB ADJUSTED VALUE"] || 0),
+      0
+    ) +
       data_w.reduce(
-        (sum, item) => sum + item["REALISTIC PROB ADJUSTED VALUE"],
-        0
-      ) +
-      data_w.reduce((sum, item) => sum + item["MAX PROB ADJUSTED VALUE"], 0) +
-      data_w.reduce(
-        (sum, item) => sum + item["AVERAGE PROB ADJUSTED VALUE"],
+        (sum, item) => sum + (item["REALISTIC PROB ADJUSTED VALUE"] || 0),
         0
       ) +
       data_w.reduce(
-        (sum, item) => sum + item["3 POINT BASED PROB ADJUSTED VALUE"],
+        (sum, item) => sum + (item["MAX PROB ADJUSTED VALUE"] || 0),
         0
       ) +
       data_w.reduce(
-        (sum, item) => sum + item["PERT BASED PROB ADJUSTED VALUE"],
+        (sum, item) => sum + (item["AVERAGE PROB ADJUSTED VALUE"] || 0),
         0
       ) +
-      data_t.reduce((sum, item) => sum + item["MIN PROB ADJUSTED VALUE"], 0) +
-      data_t.reduce(
-        (sum, item) => sum + item["REALISTIC PROB ADJUSTED VALUE"],
+      data_w.reduce(
+        (sum, item) => sum + (item["3 POINT BASED PROB ADJUSTED VALUE"] || 0),
         0
       ) +
-      data_t.reduce((sum, item) => sum + item["MAX PROB ADJUSTED VALUE"], 0) +
-      data_t.reduce(
-        (sum, item) => sum + item["AVERAGE PROB ADJUSTED VALUE"],
-        0
-      ) +
-      data_t.reduce(
-        (sum, item) => sum + item["3 POINT BASED PROB ADJUSTED VALUE"],
+      data_w.reduce(
+        (sum, item) => sum + (item["PERT BASED PROB ADJUSTED VALUE"] || 0),
         0
       ) +
       data_t.reduce(
-        (sum, item) => sum + item["PERT BASED PROB ADJUSTED VALUE"],
+        (sum, item) => sum + (item["MIN PROB ADJUSTED VALUE"] || 0),
+        0
+      ) +
+      data_t.reduce(
+        (sum, item) => sum + (item["REALISTIC PROB ADJUSTED VALUE"] || 0),
+        0
+      ) +
+      data_t.reduce(
+        (sum, item) => sum + (item["MAX PROB ADJUSTED VALUE"] || 0),
+        0
+      ) +
+      data_t.reduce(
+        (sum, item) => sum + (item["AVERAGE PROB ADJUSTED VALUE"] || 0),
+        0
+      ) +
+      data_t.reduce(
+        (sum, item) => sum + (item["3 POINT BASED PROB ADJUSTED VALUE"] || 0),
+        0
+      ) +
+      data_t.reduce(
+        (sum, item) => sum + (item["PERT BASED PROB ADJUSTED VALUE"] || 0),
         0
       ),
   ];
   if (differential === "Differential") {
-    const positiveValues = positiveData;
-    const negativeValues = negativeData;
+    const positiveValues = positiveData.filter((value) => value !== null);
+    const negativeValues = negativeData.filter((value) => value !== null);
 
     if (positiveValues && negativeValues) {
       differentialData = positiveValues.map(

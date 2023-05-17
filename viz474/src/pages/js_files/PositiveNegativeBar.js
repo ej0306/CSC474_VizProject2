@@ -297,8 +297,8 @@ const PosBarGraph = () => {
           <div className="btn-grp-diff">
             <button onClick={handleButtonClickDiff}>
               {differential === "Differential"
-                ? "Hide Differential"
-                : "Show Differential"}
+                ? "Summation/Diffrential"
+                : "Summation/Diffrential"}
             </button>
           </div>
         </div>
