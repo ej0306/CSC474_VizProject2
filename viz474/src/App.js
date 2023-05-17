@@ -24,10 +24,10 @@ function App() {
                   <button class="btn-app">SWOT ANALYSIS GRAPHS</button>
                 </Link>
                 <Link to="/sum">
-                  <button class="btn-app">SUMMATION BARS</button>
+                  <button class="btn-app">SUMMATION</button>
                 </Link>
                 <Link to="/pos">
-                  <button class="btn-app">POSITIVE/NEGATIVE BARS</button>
+                  <button class="btn-app">POSITIVE || NEGATIVE</button>
                 </Link>
                 {showForm && <Form />}
                 <GraphSelector toggleForm={toggleForm} />
@@ -42,10 +42,10 @@ function App() {
                   <button class="btn-app">SWOT ANALYSIS GRAPHS</button>
                 </Link>
                 <Link to="/sum">
-                  <button class="btn-app">SUMMATION BARS</button>
+                  <button class="btn-app">SUMMATION</button>
                 </Link>
                 <Link to="/pos">
-                  <button class="btn-app">POSITIVE/NEGATIVE BARS</button>
+                  <button class="btn-app">POSITIVE || NEGATIVE</button>
                 </Link>
                 <SumBarGraph />
               </div>
@@ -59,10 +59,10 @@ function App() {
                   <button class="btn-app">SWOT ANALYSIS GRAPHS</button>
                 </Link>
                 <Link to="/sum">
-                  <button class="btn-app">SUMMATION BARS</button>
+                  <button class="btn-app">SUMMATION</button>
                 </Link>
                 <Link to="/pos">
-                  <button class="btn-app">POSITIVE/NEGATIVE BARS</button>
+                  <button class="btn-app">POSITIVE || NEGATIVE</button>
                 </Link>
                 <PosBarGraph />
               </div>

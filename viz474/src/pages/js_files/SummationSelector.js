@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import ChartDataLabels from "chartjs-plugin-datalabels"; // Import the datalabels plugin
 import { Bar } from "react-chartjs-2";
 import "../stylesheets/posneg.css";
 import data_s from "../../json_files/strength.json";
@@ -162,10 +163,12 @@ const SumBarGraph = () => {
       datalabels: {
         anchor: "end",
         align: "end",
-        formatter: (value) => (value !== 0 ? value : ""),
-        color: "black", // Color of the value labels
+        formatter: (value) =>
+          typeof value === "number" ? value.toFixed(2) : "",
+        color: "teal", // Color of the value labels
         font: {
           weight: "bold", // Font weight of the value labels
+          size: 14,
         },
       },
     },
@@ -194,10 +197,13 @@ const SumBarGraph = () => {
         </div>
       </div>
       <div className="header">
-        <h3 className="title">SWOT - SUMMATION</h3>
+        <h3 className="title">
+          Sum of the probabilities for Strength, Opportunity, Weakness, and
+          Threat data.{" "}
+        </h3>
       </div>
       <div className="graph-container">
-        <Bar data={data} options={options} />
+        <Bar data={data} options={options} plugins={[ChartDataLabels]} />
       </div>
     </>
   );

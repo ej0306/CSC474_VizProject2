@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Chart from "chart.js/auto";
+import ChartDataLabels from "chartjs-plugin-datalabels"; // Import the datalabels plugin
 
 class BarGraph extends Component {
   constructor(props) {
@@ -24,7 +25,6 @@ class BarGraph extends Component {
     }
     const myChartRef = this.chartRef.current.getContext("2d");
     this.myChart = new Chart(myChartRef, {
-      label: ["Strenght", "Weakness", "Opportunity", "Threat"],
       type: "bar",
       data: {
         labels: ["Min", "Realistic", "Max", "Avg.", "3PT", "PERT"],
@@ -73,7 +73,21 @@ class BarGraph extends Component {
             },
           ],
         },
+        plugins: {
+          datalabels: {
+            anchor: "end",
+            align: "end",
+            formatter: (value) =>
+              typeof value === "number" ? value.toFixed(2) : "",
+            color: "teal", // Color of the value labels
+            font: {
+              weight: "bold", // Font weight of the value labels
+              size: 15,
+            },
+          },
+        },
       },
+      plugins: [ChartDataLabels], // Add the datalabels plugin to the list of plugins
     });
   }
 

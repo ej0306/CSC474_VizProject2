@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import { Bar } from "react-chartjs-2";
+import ChartDataLabels from "chartjs-plugin-datalabels"; // Import the datalabels plugin
 import "../stylesheets/posneg.css";
 import data_s from "../../json_files/strength.json";
 import data_w from "../../json_files/weakness.json";
 import data_op from "../../json_files/opportunity.json";
 import data_t from "../../json_files/threatanalysis.json";
-import data_ss from "../../json_files/strengthsum.json";
-import data_ww from "../../json_files/weaknesssum.json";
-import data_ops from "../../json_files/opportunitysum.json";
-import data_tt from "../../json_files/threatanalysissum.json";
 
 const PosBarGraph = () => {
   const [factorTypePos, setFactorTypePos] = useState("");
@@ -119,7 +116,7 @@ const PosBarGraph = () => {
       data_t[1]["MAX PROB ADJUSTED VALUE"],
       data_t[1]["AVERAGE PROB ADJUSTED VALUE"],
       data_t[1]["3 POINT BASED PROB ADJUSTED VALUE"],
-      data_t[1]["PERT BASED PROB ADJUSTED VALUE"],
+      data_t[1]["PERT BASED PROB ADJUSTEDVALUE"],
     ];
   } else if (factorTypeNeg === "Tax Code change") {
     negativeData = [
@@ -142,10 +139,9 @@ const PosBarGraph = () => {
         (data_w[0]["MIN PROB ADJUSTED VALUE"] +
           data_w[1]["MIN PROB ADJUSTED VALUE"] +
           data_w[2]["MIN PROB ADJUSTED VALUE"] +
-          (data_tt[0]["MIN PROB ADJUSTED VALUE"] +
+          (data_t[0]["MIN PROB ADJUSTED VALUE"] +
             data_t[1]["MIN PROB ADJUSTED VALUE"] +
             data_t[2]["MIN PROB ADJUSTED VALUE"])),
-
       data_s[0]["REALISTIC PROB ADJUSTED VALUE"] +
         data_s[1]["REALISTIC PROB ADJUSTED VALUE"] +
         data_s[2]["REALISTIC PROB ADJUSTED VALUE"] +
@@ -155,7 +151,7 @@ const PosBarGraph = () => {
         (data_w[0]["REALISTIC PROB ADJUSTED VALUE"] +
           data_w[1]["REALISTIC PROB ADJUSTED VALUE"] +
           data_w[2]["REALISTIC PROB ADJUSTED VALUE"] +
-          (data_tt[0]["REALISTIC PROB ADJUSTED VALUE"] +
+          (data_t[0]["REALISTIC PROB ADJUSTED VALUE"] +
             data_t[1]["REALISTIC PROB ADJUSTED VALUE"] +
             data_t[2]["REALISTIC PROB ADJUSTED VALUE"])),
 
@@ -168,7 +164,7 @@ const PosBarGraph = () => {
         (data_w[0]["MAX PROB ADJUSTED VALUE"] +
           data_w[1]["MAX PROB ADJUSTED VALUE"] +
           data_w[2]["MAX PROB ADJUSTED VALUE"] +
-          (data_tt[0]["MAX PROB ADJUSTED VALUE"] +
+          (data_t[0]["MAX PROB ADJUSTED VALUE"] +
             data_t[1]["MAX PROB ADJUSTED VALUE"] +
             data_t[2]["MAX PROB ADJUSTED VALUE"])),
 
@@ -181,10 +177,9 @@ const PosBarGraph = () => {
         (data_w[0]["AVERAGE PROB ADJUSTED VALUE"] +
           data_w[1]["AVERAGE PROB ADJUSTED VALUE"] +
           data_w[2]["AVERAGE PROB ADJUSTED VALUE"] +
-          (data_tt[0]["AVERAGE PROB ADJUSTED VALUE"] +
+          (data_t[0]["AVERAGE PROB ADJUSTED VALUE"] +
             data_t[1]["AVERAGE PROB ADJUSTED VALUE"] +
             data_t[2]["AVERAGE PROB ADJUSTED VALUE"])),
-
       data_s[0]["3 POINT BASED PROB ADJUSTED VALUE"] +
         data_s[1]["3 POINT BASED PROB ADJUSTED VALUE"] +
         data_s[2]["3 POINT BASED PROB ADJUSTED VALUE"] +
@@ -194,7 +189,7 @@ const PosBarGraph = () => {
         (data_w[0]["3 POINT BASED PROB ADJUSTED VALUE"] +
           data_w[1]["3 POINT BASED PROB ADJUSTED VALUE"] +
           data_w[2]["3 POINT BASED PROB ADJUSTED VALUE"] +
-          (data_tt[0]["3 POINT BASED PROB ADJUSTED VALUE"] +
+          (data_t[0]["3 POINT BASED PROB ADJUSTED VALUE"] +
             data_t[1]["3 POINT BASED PROB ADJUSTED VALUE"] +
             data_t[2]["3 POINT BASED PROB ADJUSTED VALUE"])),
 
@@ -207,7 +202,7 @@ const PosBarGraph = () => {
         (data_w[0]["PERT BASED PROB ADJUSTED VALUE"] +
           data_w[1]["PERT BASED PROB ADJUSTED VALUE"] +
           data_w[2]["PERT BASED PROB ADJUSTED VALUE"] +
-          (data_tt[0]["PERT BASED PROB ADJUSTED VALUE"] +
+          (data_t[0]["PERT BASED PROB ADJUSTED VALUE"] +
             data_t[1]["PERT BASED PROB ADJUSTED VALUE"] +
             data_t[2]["PERT BASED PROB ADJUSTED VALUE"])),
     ];
@@ -218,12 +213,12 @@ const PosBarGraph = () => {
       {
         label: "Positive",
         data: positiveData,
-        backgroundColor: "rgba(63,63,62)",
+        backgroundColor: "rgba(63,63,62, 0.9)",
       },
       {
         label: "Negative",
         data: negativeData,
-        backgroundColor: "rgba(197,69,86)",
+        backgroundColor: "rgba(197,69,86, 0.9)",
       },
       {
         label: "Differential",
@@ -248,10 +243,11 @@ const PosBarGraph = () => {
       datalabels: {
         anchor: "end",
         align: "end",
-        formatter: (value) => (value !== 0 ? value : ""),
-        color: "black", // Color of the value labels
+        formatter: (value) => (value !== 0 ? value.toFixed(2) : ""),
+        color: "teal", //Color of the value labels
         font: {
           weight: "bold", // Font weight of the value labels
+          size: 15, // Font size of the value labels
         },
       },
     },
@@ -300,7 +296,6 @@ const PosBarGraph = () => {
               </option>
             </select>
           </div>
-
           <div className="btn-neg">
             <select
               value={factorTypeNeg}
@@ -334,11 +329,15 @@ const PosBarGraph = () => {
       </div>
       <div className="header">
         <h3 className="title">
-          {factorTypePos} || {factorTypeNeg} Bar Graph
+          {factorTypePos} || {factorTypeNeg} - ADJUSTED PROBABILITY VALUES
+        </h3>
+        <h3 className="title">
+          Values in Dollar for {factorTypePos} in Black lines || Values in
+          Dollar for {factorTypeNeg} in Red lines
         </h3>
       </div>
       <div className="graph-container">
-        <Bar data={data} options={options} />
+        <Bar data={data} options={options} plugins={[ChartDataLabels]} />
       </div>
     </>
   );
