@@ -129,84 +129,56 @@ const PosBarGraph = () => {
     ];
   }
   if (differential === "Differential") {
-    differentialData = [
-      data_s[0]["MIN PROB ADJUSTED VALUE"] +
-        data_s[1]["MIN PROB ADJUSTED VALUE"] +
-        data_s[2]["MIN PROB ADJUSTED VALUE"] +
-        (data_op[0]["MIN PROB ADJUSTED VALUE"] +
-          data_op[1]["MIN PROB ADJUSTED VALUE"] +
-          data_op[2]["MIN PROB ADJUSTED VALUE"]) -
-        (data_w[0]["MIN PROB ADJUSTED VALUE"] +
-          data_w[1]["MIN PROB ADJUSTED VALUE"] +
-          data_w[2]["MIN PROB ADJUSTED VALUE"] +
-          (data_t[0]["MIN PROB ADJUSTED VALUE"] +
-            data_t[1]["MIN PROB ADJUSTED VALUE"] +
-            data_t[2]["MIN PROB ADJUSTED VALUE"])),
-      data_s[0]["REALISTIC PROB ADJUSTED VALUE"] +
-        data_s[1]["REALISTIC PROB ADJUSTED VALUE"] +
-        data_s[2]["REALISTIC PROB ADJUSTED VALUE"] +
-        (data_op[0]["REALISTIC PROB ADJUSTED VALUE"] +
-          data_op[1]["REALISTIC PROB ADJUSTED VALUE"] +
-          data_op[2]["REALISTIC PROB ADJUSTED VALUE"]) -
-        (data_w[0]["REALISTIC PROB ADJUSTED VALUE"] +
-          data_w[1]["REALISTIC PROB ADJUSTED VALUE"] +
-          data_w[2]["REALISTIC PROB ADJUSTED VALUE"] +
-          (data_t[0]["REALISTIC PROB ADJUSTED VALUE"] +
-            data_t[1]["REALISTIC PROB ADJUSTED VALUE"] +
-            data_t[2]["REALISTIC PROB ADJUSTED VALUE"])),
+    const positiveValues =
+      factorTypePos === "Patented Technology"
+        ? data_s[0]
+        : factorTypePos === "Tech Resources"
+        ? data_s[1]
+        : factorTypePos === "Transportation Access Points"
+        ? data_s[2]
+        : factorTypePos === "Local Tax Incentive"
+        ? data_op[0]
+        : factorTypePos === "Export Zone Location"
+        ? data_op[1]
+        : factorTypePos === "Easy Access to Ports"
+        ? data_op[2]
+        : null;
 
-      data_s[0]["MAX PROB ADJUSTED VALUE"] +
-        data_s[1]["MAX PROB ADJUSTED VALUE"] +
-        data_s[2]["MAX PROB ADJUSTED VALUE"] +
-        (data_op[0]["MAX PROB ADJUSTED VALUE"] +
-          data_op[1]["MAX PROB ADJUSTED VALUE"] +
-          data_op[2]["MAX PROB ADJUSTED VALUE"]) -
-        (data_w[0]["MAX PROB ADJUSTED VALUE"] +
-          data_w[1]["MAX PROB ADJUSTED VALUE"] +
-          data_w[2]["MAX PROB ADJUSTED VALUE"] +
-          (data_t[0]["MAX PROB ADJUSTED VALUE"] +
-            data_t[1]["MAX PROB ADJUSTED VALUE"] +
-            data_t[2]["MAX PROB ADJUSTED VALUE"])),
+    const negativeValues =
+      factorTypeNeg === "Real Estate Cost"
+        ? data_w[0]
+        : factorTypeNeg === "Tech Platform Changes"
+        ? data_w[1]
+        : factorTypeNeg === "Access to Ports"
+        ? data_w[2]
+        : factorTypeNeg === "Political unrest"
+        ? data_t[0]
+        : factorTypeNeg === "Competition"
+        ? data_t[1]
+        : factorTypeNeg === "Tax Code change"
+        ? data_t[2]
+        : null;
 
-      data_s[0]["AVERAGE PROB ADJUSTED VALUE"] +
-        data_s[1]["AVERAGE PROB ADJUSTED VALUE"] +
-        data_s[2]["AVERAGE PROB ADJUSTED VALUE"] +
-        (data_op[0]["AVERAGE PROB ADJUSTED VALUE"] +
-          data_op[1]["AVERAGE PROB ADJUSTED VALUE"] +
-          data_op[2]["AVERAGE PROB ADJUSTED VALUE"]) -
-        (data_w[0]["AVERAGE PROB ADJUSTED VALUE"] +
-          data_w[1]["AVERAGE PROB ADJUSTED VALUE"] +
-          data_w[2]["AVERAGE PROB ADJUSTED VALUE"] +
-          (data_t[0]["AVERAGE PROB ADJUSTED VALUE"] +
-            data_t[1]["AVERAGE PROB ADJUSTED VALUE"] +
-            data_t[2]["AVERAGE PROB ADJUSTED VALUE"])),
-      data_s[0]["3 POINT BASED PROB ADJUSTED VALUE"] +
-        data_s[1]["3 POINT BASED PROB ADJUSTED VALUE"] +
-        data_s[2]["3 POINT BASED PROB ADJUSTED VALUE"] +
-        (data_op[0]["3 POINT BASED PROB ADJUSTED VALUE"] +
-          data_op[1]["3 POINT BASED PROB ADJUSTED VALUE"] +
-          data_op[2]["3 POINT BASED PROB ADJUSTED VALUE"]) -
-        (data_w[0]["3 POINT BASED PROB ADJUSTED VALUE"] +
-          data_w[1]["3 POINT BASED PROB ADJUSTED VALUE"] +
-          data_w[2]["3 POINT BASED PROB ADJUSTED VALUE"] +
-          (data_t[0]["3 POINT BASED PROB ADJUSTED VALUE"] +
-            data_t[1]["3 POINT BASED PROB ADJUSTED VALUE"] +
-            data_t[2]["3 POINT BASED PROB ADJUSTED VALUE"])),
-
-      data_s[0]["PERT BASED PROB ADJUSTED VALUE"] +
-        data_s[1]["PERT BASED PROB ADJUSTED VALUE"] +
-        data_s[2]["PERT BASED PROB ADJUSTED VALUE"] +
-        (data_op[0]["PERT BASED PROB ADJUSTED VALUE"] +
-          data_op[1]["PERT BASED PROB ADJUSTED VALUE"] +
-          data_op[2]["PERT BASED PROB ADJUSTED VALUE"]) -
-        (data_w[0]["PERT BASED PROB ADJUSTED VALUE"] +
-          data_w[1]["PERT BASED PROB ADJUSTED VALUE"] +
-          data_w[2]["PERT BASED PROB ADJUSTED VALUE"] +
-          (data_t[0]["PERT BASED PROB ADJUSTED VALUE"] +
-            data_t[1]["PERT BASED PROB ADJUSTED VALUE"] +
-            data_t[2]["PERT BASED PROB ADJUSTED VALUE"])),
-    ];
+    if (positiveValues && negativeValues) {
+      differentialData = [
+        positiveValues["MIN PROB ADJUSTED VALUE"] +
+          -negativeValues["MIN PROB ADJUSTED VALUE"],
+        positiveValues["REALISTIC PROB ADJUSTED VALUE"] +
+          -negativeValues["REALISTIC PROB ADJUSTED VALUE"],
+        positiveValues["MAX PROB ADJUSTED VALUE"] +
+          -negativeValues["MAX PROB ADJUSTED VALUE"],
+        positiveValues["AVERAGE PROB ADJUSTED VALUE"] +
+          -negativeValues["AVERAGE PROB ADJUSTED VALUE"],
+        positiveValues["3 POINT BASED PROB ADJUSTED VALUE"] +
+          -negativeValues["3 POINT BASED PROB ADJUSTED VALUE"],
+        positiveValues["PERT BASED PROB ADJUSTED VALUE"] +
+          -negativeValues["PERT BASED PROB ADJUSTED VALUE"],
+      ];
+    } else {
+      differentialData = [];
+    }
   }
+
   const data = {
     labels: ["MIN", "REALISTIC", "MAX", "AVERAGE", "3PT", "PERT"],
     datasets: [
