@@ -27,20 +27,11 @@ class BarGraph extends Component {
     this.myChart = new Chart(myChartRef, {
       type: "bar",
       data: {
-        labels: [
-          "EST. Value in Currency",
-          "Min",
-          "Realistic",
-          "Max",
-          "Avg.",
-          "3PT",
-          "PERT",
-        ],
+        labels: ["Min", "Realistic", "Max", "Avg.", "3PT", "PERT"],
         datasets: [
           {
             label: this.props.label,
             data: [
-              this.props.data?.[0]?.["EST. VALUE IN CURRENCY"],
               this.props.data?.[0]?.["MIN PROB ADJUSTED VALUE"],
               this.props.data?.[0]?.["REALISTIC PROB ADJUSTED VALUE"],
               this.props.data?.[0]?.["MAX PROB ADJUSTED VALUE"],
@@ -112,7 +103,6 @@ class BarGraph extends Component {
 
   updateChart() {
     this.myChart.data.datasets[0].data = [
-      this.props.data?.[0]?.["EST. VALUE IN CURRENCY"],
       this.props.data?.[0]?.["MIN PROB ADJUSTED VALUE"],
       this.props.data?.[0]?.["REALISTIC PROB ADJUSTED VALUE"],
       this.props.data?.[0]?.["MAX PROB ADJUSTED VALUE"],
